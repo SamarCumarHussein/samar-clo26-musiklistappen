@@ -10,21 +10,11 @@ namespace MusikApp;
 ///
 /// ADO.NET i fem steg (samma i varje metod som pratar med databasen):
 ///   1. Öppna en anslutning        -> new SqliteConnection(...) och connection.Open()
-//using var connection = new SqliteConnection("Data Source=musik.db");
-//connection.Open();
 ///   2. Skapa ett kommando         -> connection.CreateCommand()
-//using var command = connectionCreateCommand();
 ///   3. Skriv SQL:en               -> command.CommandText = "..."
-//command.CommandText = "SELECT * FROM Låtar";
 ///   4. Skicka in värden säkert    -> command.Parameters.AddWithValue("@namn", värde)
-//using var reader = command.ExecuteReader();
 ///   5. Kör kommandot              -> ExecuteReader() för SELECT, ExecuteNonQuery() för INSERT/DELETE
-//using var reader = command.ExecuteReader();
-//while (reader.Read())
-//{
-    // Läs värden från reader, t.ex. reader.GetInt32(0) eller reader["Titel"]
-   // Console.WriteLine($"Id: {reader.GetInt32(0)}, Titel: {reader.GetString(1)}");
-//}
+///      Läs värden från reader, t.ex. reader.GetInt32(0) eller reader["Titel"]
 /// Använd "using var" på anslutning och kommando så stängs de av sig själva.
 /// Bygg SQL:en med parametrar (@titel), aldrig genom att klistra ihop strängar.
 /// </summary>
