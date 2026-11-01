@@ -28,7 +28,7 @@ public class DbHandler
     {
         // TODO: spara connectionString i ett fält som metoderna nedan kan använda.
         _connectionString = connectionString;
-        throw new NotImplementedException();
+       
     }
 
     // ---------------------------------------------------------------
@@ -48,18 +48,19 @@ public class DbHandler
         // TODO: loopa med reader.Read() och gör ett Song-objekt av varje rad.
         while (reader.Read())
         {
+            if (reader.IsDBNull(0))
+                continue;
+
             songs.Add(new Song
             {
-                // Tips: reader.GetInt32(0), reader.GetString(1) ... eller reader["Titel"].
                 Id = reader.GetInt32(0),
                 Title = reader.GetString(1),
                 LengthSong = reader.GetInt32(2)
             });
         }
-            return songs;
-    }
-    
 
+        return songs;
+    }
 
     /// <summary>Hämtar en specifik låt. Returnerar null om den inte finns.</summary>
     public Song? GetSongById(int id)
@@ -67,7 +68,22 @@ public class DbHandler
 
         // TODO: SELECT ... WHERE Id = @id (parameter!).
         // TODO: if (reader.Read()) { ... } annars returnera null.
-        throw new NotImplementedException();
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText = "SELECT Id, Title, Length_song FROM Songs WHERE Id = @id";
+        command.Parameters.AddWithValue("@id", id);
+        using var reader = command.ExecuteReader();
+        if (reader.Read())
+        {
+            return new Song
+            {
+                Id = reader.GetInt32(0),
+                Title = reader.GetString(1),
+                LengthSong = reader.GetInt32(2)
+            };
+        }
+        return null;
     }
 
     /// <summary>Söker låtar där titeln innehåller söktexten.</summary>
@@ -75,7 +91,23 @@ public class DbHandler
     {
         // TODO: SELECT ... WHERE Titel LIKE @sok.
         // Tips: parametervärdet ska vara "%" + searchText + "%" så att LIKE matchar delar av titeln.
-        throw new NotImplementedException();
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText = "SELECT Id, Title, Length_song FROM Songs WHERE Title LIKE @searchText";
+        command.Parameters.AddWithValue("@searchText", "%" + searchText + "%");
+        using var reader = command.ExecuteReader();
+        var songs = new List<Song>();
+        while (reader.Read())
+        {
+            songs.Add(new Song
+            {
+                Id = reader.GetInt32(0),
+                Title = reader.GetString(1),
+                LengthSong = reader.GetInt32(2)
+            });
+        }
+        return songs;
     }
 
     /// <summary>Lägger till en ny låt.</summary>
@@ -83,7 +115,13 @@ public class DbHandler
     {
         // TODO: INSERT INTO ... VALUES (@titel, @langd, ...) med parametrar.
         // Tips: INSERT ger ingen data tillbaka, så använd ExecuteNonQuery().
-        throw new NotImplementedException();
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText = "INSERT INTO Songs (Title, Length_song) VALUES (@title, @length)";
+        command.Parameters.AddWithValue("@title", song.Title);
+        command.Parameters.AddWithValue("@length", song.LengthSong);
+        command.ExecuteNonQuery();
     }
 
     /// <summary>Tar bort en låt. Returnerar true om en rad faktiskt togs bort.</summary>
