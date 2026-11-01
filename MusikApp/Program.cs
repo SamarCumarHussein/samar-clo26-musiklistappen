@@ -14,6 +14,7 @@ var connectionString = config.GetConnectionString("Default")
 // Börja här. Den här raden visar att inställningarna lästes in, ta bort den när du vill.
 Console.WriteLine($"Musiklistappen: börja med att få menyn att fungera!  (databas: {connectionString})");
 
+
 // Tips på ordning (se UPPGIFT.md):
 //   2. Skapa ett DbHandler-objekt: new DbHandler(connectionString
 var db = new DbHandler(connectionString);
