@@ -64,6 +64,7 @@ public class DbHandler
     /// <summary>Hämtar en specifik låt. Returnerar null om den inte finns.</summary>
     public Song? GetSongById(int id)
     {
+
         // TODO: SELECT ... WHERE Id = @id (parameter!).
         // TODO: if (reader.Read()) { ... } annars returnera null.
         throw new NotImplementedException();
@@ -91,7 +92,13 @@ public class DbHandler
         // TODO: DELETE FROM ... WHERE Id = @id.
         // Tips: ExecuteNonQuery() returnerar antalet påverkade rader.
         // Menyn i Program.cs ska fråga "Är du säker? j/n" innan den här metoden anropas.
-        throw new NotImplementedException();
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText = "DELETE FROM Songs WHERE Id = @id";
+        command.Parameters.AddWithValue("@id", id);
+        int rowsAffected = command.ExecuteNonQuery();
+        return rowsAffected > 0;
     }
 
     // ---------------------------------------------------------------
