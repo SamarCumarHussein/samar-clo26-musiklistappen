@@ -6,13 +6,13 @@
 
 ## Vad appen gör
 
-[Skriv här: två till tre meningar om din app. Vilken artist handlar den om och vad kan man göra i menyn?]
+[Appen handlar om rapparen 2Pac. Man kan se hans låtar, lägga till nya låtar och ta bort låtar.]
 
 ## Så kör du den
 
 ```bash
-git clone [länk till din fork]
-cd [mappens namn]/MusikApp
+git clone [https://github.com/SamarCumarHussein/samar-clo26-musiklistappen.git]
+cd [samar-clo26-musiklistappen]
 dotnet run
 ```
 
