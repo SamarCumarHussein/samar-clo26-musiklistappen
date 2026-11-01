@@ -23,10 +23,11 @@ public class DbHandler
     // Tips: spara bara connection string här. Den kommer från appsettings.json
     // via Program.cs (t.ex. "Data Source=musik.db").
     // Öppna sedan en NY anslutning inuti varje metod nedan.
-
+    private readonly string _connectionString;
     public DbHandler(string connectionString)
     {
         // TODO: spara connectionString i ett fält som metoderna nedan kan använda.
+        _connectionString = connectionString;
         throw new NotImplementedException();
     }
 
