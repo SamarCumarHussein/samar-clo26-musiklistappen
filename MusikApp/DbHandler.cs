@@ -38,11 +38,28 @@ public class DbHandler
     /// <summary>Hämtar alla låtar, sorterade på titel.</summary>
     public List<Song> GetAllSongs()
     {
-        // TODO: SELECT från din låt-tabell med ORDER BY.
+        // TODO: SELECT från din låt-tabell med ORDER BY
+        var songs = new List<Song>();
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText = "SELECT Id, Title, Length_song FROM Songs ORDER BY Title";
+        using var reader = command.ExecuteReader();
         // TODO: loopa med reader.Read() och gör ett Song-objekt av varje rad.
-        // Tips: reader.GetInt32(0), reader.GetString(1) ... eller reader["Titel"].
-        throw new NotImplementedException();
+        while (reader.Read())
+        {
+            songs.Add(new Song
+            {
+                // Tips: reader.GetInt32(0), reader.GetString(1) ... eller reader["Titel"].
+                Id = reader.GetInt32(0),
+                Title = reader.GetString(1),
+                LengthSong = reader.GetInt32(2)
+            });
+        }
+            return songs;
     }
+    
+
 
     /// <summary>Hämtar en specifik låt. Returnerar null om den inte finns.</summary>
     public Song? GetSongById(int id)
