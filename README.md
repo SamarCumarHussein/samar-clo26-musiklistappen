@@ -6,21 +6,20 @@
 
 ## Vad appen gör
 
-[Appen handlar om rapparen 2Pac. Man kan se hans låtar, lägga till nya låtar och ta bort låtar.]
+Appen handlar om rapparen 2Pac. Man kan se hans låtar, lägga till nya låtar och ta bort låtar.
 
 ## Så kör du den
 
 ```bash
-git clone [https://github.com/SamarCumarHussein/samar-clo26-musiklistappen.git]
-cd [samar-clo26-musiklistappen]
+git clone https://github.com/SamarCumarHussein/samar-clo26-musiklistappen.git
+cd samar-clo26-musiklistappen
 dotnet run
 ```
 
 [Skriv här om något behöver göras först, t.ex. att `musik.db` ska ligga i mappen `MusikApp/`.]
 
 ## Så ser huvudmenyn ut
-
-[Lägg in en screenshot här. Spara bilden i repot och länka den: `![Huvudmenyn](bild.png)`]
+![alt text](Huvudmenyn-Bild-3.png)
 
 ---
 
