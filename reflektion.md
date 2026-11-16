@@ -38,7 +38,4 @@ Om jag hade haft mer tid skulle jag vilja förbättra menyn och lägga till fler
 
 ---
 
-## (VG) Varför delade du upp koden som du gjorde?
-
-Resonera kring ditt designval: varför ligger databaskoden i `DbHandler` och inte i `Program.cs`? Vad hade blivit svårare om allt låg i samma fil?
 
