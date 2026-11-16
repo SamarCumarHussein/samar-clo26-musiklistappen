@@ -16,7 +16,7 @@ cd samar-clo26-musiklistappen
 dotnet run
 ```
 
-[Skriv här om något behöver göras först, t.ex. att `musik.db` ska ligga i mappen `MusikApp/`.]
+
 
 ## Så ser huvudmenyn ut
 ![alt text](Huvudmenyn-Bild-3.png)
@@ -29,12 +29,9 @@ dotnet run
 
 1. **Hur designade du din databas? Varför valde du just den strukturen?**
 
-   [Skriv här]
 
 2. **Vilket SQL-krav valde du (JOIN eller subquery) och varför passade det din app?**
 
-   [Skriv här]
 
 3. **Vad skulle du gjort annorlunda om du byggde om den från scratch?**
 
-   [Skriv här]
