@@ -28,7 +28,7 @@ public class DbHandler
     {
         // TODO: spara connectionString i ett fält som metoderna nedan kan använda.
         _connectionString = connectionString;
-       
+
     }
 
     // ---------------------------------------------------------------
@@ -42,6 +42,7 @@ public class DbHandler
         var songs = new List<Song>();
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
+
         using var command = connection.CreateCommand();
         command.CommandText = "SELECT Id, Title, Length_song FROM Songs ORDER BY Title";
         using var reader = command.ExecuteReader();
@@ -49,8 +50,8 @@ public class DbHandler
         while (reader.Read())
         {
             if (reader.IsDBNull(0))
-                continue;
 
+                continue;
             songs.Add(new Song
             {
                 Id = reader.GetInt32(0),
@@ -137,23 +138,5 @@ public class DbHandler
         command.Parameters.AddWithValue("@id", id);
         int rowsAffected = command.ExecuteNonQuery();
         return rowsAffected > 0;
-    }
-
-    // ---------------------------------------------------------------
-    // VG-nivå: du behöver minst EN av dessa två (och reflektionen i README)
-    // ---------------------------------------------------------------
-
-    /// <summary>(VG, alternativ A) Låtar tillsammans med albumets namn. Kräver en JOIN.</summary>
-    public List<(string SongTitle, string AlbumName)> GetSongsWithAlbum()
-    {
-        // TODO: SELECT Låtar.Titel, Album.Namn FROM Låtar JOIN Album ON ... ORDER BY ...
-        throw new NotImplementedException();
-    }
-
-    /// <summary>(VG, alternativ B) Låtar som är längre än medellängden. Kräver en subquery.</summary>
-    public List<Song> GetSongsLongerThanAverage()
-    {
-        // TODO: SELECT ... WHERE Längd > (SELECT AVG(Längd) FROM Låtar).
-        throw new NotImplementedException();
     }
 }

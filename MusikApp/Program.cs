@@ -91,6 +91,7 @@ while (running)
                
 //   4. Avsluta snyggt när användaren väljer "Avsluta".
                 Console.WriteLine("Programmet avslutas.");
+                running = false;
                 break;
             }
         default:
